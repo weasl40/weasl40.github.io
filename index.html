@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Azoom Car Rental</title>
+    <style>
+        /* Basic styles for body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            margin: 0;
+            padding: 10px;
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            height: 100px; /* Adjust the height as needed */
+            margin-right: 10px; /* Space between logo and navigation links */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        nav ul li {
+            float: left;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #111;
+        }
+
+        nav .login-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+        }
+
+        /* Image styles */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Media query for responsiveness */
+        @media (max-width: 600px) {
+            nav ul li {
+                float: none;
+            }
+        }
+
+        .logoContainer {
+            width: 100%;
+            display: table;
+            table-layout: fixed;
+        }
+
+        .logoContainer span {
+            display: table-cell;
+            text-align: center;
+        }
+
+        .logoContainer img {
+            width: 70px;
+            margin: 50px 5%;
+            transition: transform .2s ease-in-out;
+        }
+
+        .logoContainer img:hover { 
+            transform: scale(1.7); 
+        }
+
+        .car-logo {
+            filter: brightness(0.5); /* Adjust the brightness to make the logos darker */
+        }
+
+        /* Banner */
+        .bannerLeft {
+            float: left;
+            height: 700px;
+            width: 40%;
+            margin-left: 10%;
+            display: flex;
+            align-items: center;
+        }
+
+        .bannerLeft h1 {
+            color: #45a049;
+            font-size: 65px;
+            font-weight: 600;
+            margin-bottom: 5%;
+            margin-top: 0;
+        }
+
+        .bannerLeft p {
+            margin-top: 0;
+        }
+
+        .bannerBtn {
+            padding: 12px 30px;
+        }
+
+        .bannerLeft .bannerLink {
+            color: #45a049;
+            margin-left: 50px;
+        }
+
+        /* About section */
+        .aboutContainer {
+            margin: 7% 10%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Image */
+        .aboutLeft {
+            width: 45%;
+        }
+
+        /* Title and button */
+        .aboutRight {
+            float: right;
+            width: 55%;
+            display: flex;
+            align-items: center;
+        }
+
+        .aboutRight span {
+            margin-left: 60px;
+        }
+
+        .findOutBtn {
+            padding: 12px 35px;
+        }
+
+        /* Banner Right */
+        .bannerRight {
+            float: right;
+            height: 700px;
+            line-height: 700px;
+            width: 50%;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            background-position: right;
+            background-repeat: no-repeat;
+            background-size: cover;
+            box-shadow: 300px 0px 300px #2d333d inset;
+            text-align: right;
+            animation: fadeIn 2s;
+        }
+
+        .bannerRight img {
+            vertical-align: middle;
+            animation: flyInRight 1s ease-out;
+        }
+
+        /* Footer section */
+        footer {
+            background-color: #333;
+            width: 100%;
+        }
+
+        .footerContainer {
+            padding: 10px 0 100px 0;
+            margin: 0 10%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Azoom Logo */
+        .footerLeft {
+            width: 33%;
+        }
+
+        /* Social media */
+        .footerMiddle {
+            width: 33%;
+            text-align: center;
+        }
+
+        .footerIcons {
+            margin: 0 10px;
+            width: 35px;
+        }
+
+        /* Contact details */
+        .footerRight {
+            width: 33%;
+            text-align: right;
+            color: white;
+        }
+
+        /* Footer credit */
+        .footerCredit {
+            font-size: 12px;
+            text-align: center;
+            color: gray;
+            padding-bottom: 10px;
+        }
+
+        .footerCredit a {
+            color: darkgray;
+        }
+
+        /* Modal styles */
+        .modalBg {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modalContent {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Blur effect for background */
+        .blur {
+            filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <h1>Home | Azoom Car Rental</h1>
+    </header>
+
+    <!-- Navigation bar -->
+    <nav>
+        <img src="img/azoom.png" alt="Logo" class="logo">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cars.html">Cars</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="login-btn" id="navLoginBtn">Login</button>
+    </nav>
+
+    <!-- Login Modal -->
+    <div id="loginPopup" class="modalBg">
+        <div class="modalContent">
+            <span class="close" onclick="document.getElementById('loginPopup').style.display='none'">&times;</span>
+            <form id="loginContent">
+                <div class="loginContainer">
+                    <div class="loginImg">
+                        <img src="img/azoom.png" width="50px">
+                    </div>
+                    
+                    <p id="invalidLogin" style="display:none; color:red;">Invalid username and/or password</p>
+
+                    <input type="text" name="username" id="usernameField" placeholder="Username" required>
+            
+                    <input type="password" name="password" id="passwordField" placeholder="Password" required>
+
+                    <input type="submit" value="Login" id="loginBtn" onclick="rememberMe()">
+                    <label><input type="checkbox" id="rememberMeCB" value="rememberMe"> Remember me</label>
+                    <span class="forgotPwd">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
+    </div><div class="clear"></div>
+
+    <!-- Main content -->
+    <main id="mainContent">
+        <div class="bannerLeft animateOnScroll">
+            <span>
+                <h1>Drive and experience all kinds of vehicles</h1>
+                <p>We have all kinds of cars, ranging from performance to cross-functional vehicles, whether you are looking for a fun driving experience, or a practical car for your family, we have you covered.</p>
+                
+                <button class="bannerBtn" type="button">Sign up</button>
+                <a class="bannerLink" href="contact.html">Where to contact us</a>
+            </span>
+        </div>
+
+        <div class="bannerRight">
+            <img src="img/thumbnails/tesla3.png" width="950px">
+        </div><div class="clear"></div>
+
+        <div class="logoContainer animateOnScroll">
+            <span>
+                <a href="cars.html"><img src="img/carBrands/honda.png" class="car-logo"></a>
+                <a href="cars.html"><img src="img/carBrands/nissan.png" class="car-logo"></a>
+                <a href="cars.html"><img src="img/carBrands/hyundai.png" class="car-logo"></a>
+                <a href="cars.html"><img src="img/carBrands/mini.png" class="car-logo"></a>
+                <a href="cars.html"><img src="img/carBrands/bmw.png" class="car-logo"></a>
+                <a href="cars.html"><img src="img/carBrands/tesla.png" class="car-logo"></a>
+            </span>
+        </div>
+
+        <div class="aboutContainer">
+            <div class="aboutLeft animateOnScroll">
+                <img src="img/thumbnails/tesla3.png" width="100%">
+            </div>
+
+            <div class="aboutRight animateOnScroll">
+                <span>
+                    <h1>About us</h1>
+                    <h2>Wide selection of brands and models to choose from</h2>
+                    <p>In addition to our <b>well maintained vehicles</b>, we have multiple locations throughout the <b>Central, West and South regions</b>, so you are sure to find an accessible pick-up and drop-off point near you.</p>
+                    <h2>Our Mission</h2>
+                    <p>We aim to provide the <b>best experience</b> for renting cars.</p>
+                    <h2>Our Team</h2>
+                    <p>Our team consists of <b>experienced agent</b> who are <b>passionate and dedicated</b> to provide our customers with a <b>pleasant and hassle-free car rental experience</b>.</p>
+
+                    <button class="findOutBtn" type="button" onclick="location.href='cars.html'">Find out more &#8640;</button>
+                </span>
+            </div>
+        </div><div class="clear"></div>
+    </main>
+
+    <!-- Footer section -->
+    <footer>
+        <div class="footerContainer">
+            <span class="footerLeft">
+                <a href="home.html"><img src="img/azoom.png" width="150px"></a>
+            </span>
+
+            <span class="footerMiddle">
+                <span>
+                    <a href="https://www.facebook.com/"><img class="footerIcons" src="img/icons/facebook.png"></a>
+                    <a href="https://www.instagram.com/"><img class="footerIcons" src="img/icons/instagram.png"></a>
+                    <a href="https://www.twitter.com/"><img class="footerIcons" src="img/icons/twitter.png"></a>
+                </span>
+            </span>
+
+            <span class="footerRight">
+                <span>
+                    <p>Contact us:</p>
+                    <p>azoom@gmail.com</p>
+                    <p>+65 9123 4567</p>
+                </span>
+            </span>
+        </div>
+        <div class="footerCredit">
+            Coded and designed by <a href="">Chai Zong Xian</a>.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script src="javascript/rmb.js"></script>
+    <script src="javascript/main.js"></script>
+</body>
+</html>
