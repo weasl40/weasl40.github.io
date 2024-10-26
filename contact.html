@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How To Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            margin: 0;
+            padding: 10px;
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            height: 100px; /* Adjust the height as needed */
+            margin-right: 10px; /* Space between logo and navigation links */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        nav ul li {
+            float: left;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #111;
+        }
+
+        nav .login-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        /* Footer section */
+        footer {
+            background-color: #333;
+            width: 100%;
+        }
+
+        .footerContainer {
+            padding: 10px 0 100px 0;
+            margin: 0 10%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Azoom Logo */
+        .footerLeft {
+            width: 33%;
+        }
+
+        /* Social media */
+        .footerMiddle {
+            width: 33%;
+            text-align: center;
+        }
+
+        .footerIcons {
+            margin: 0 10px;
+            width: 35px;
+        }
+
+        /* Contact details */
+        .footerRight {
+            width: 33%;
+            text-align: right;
+            color: white;
+        }
+
+        /* Footer credit */
+        .footerCredit {
+            font-size: 12px;
+            text-align: center;
+            color: gray;
+            padding-bottom: 10px;
+        }
+
+        .footerCredit a {
+            color: darkgray;
+        }
+
+        /* Map container styles */
+        .map-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .map-container {
+            width: 32%; /* Adjust width to fit three maps in a row */
+            padding-bottom: 18%; /* Maintain aspect ratio */
+            position: relative;
+            margin-bottom: 20px; /* Space between maps */
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Modal styles */
+        .modalBg {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modalContent {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Blur effect for background */
+        .blur {
+            filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>How To Contact Us</h1>
+    </header>
+
+    <!-- Navigation bar -->
+    <nav>
+        <img src="img/azoom.png" alt="Logo" class="logo">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="cars.html">Cars</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="login-btn" id="navLoginBtn">Login</button>
+    </nav>
+
+    <!-- Login Modal -->
+    <div id="loginPopup" class="modalBg">
+        <div class="modalContent">
+            <span class="close" onclick="document.getElementById('loginPopup').style.display='none'">&times;</span>
+            <form id="loginContent">
+                <div class="loginContainer">
+                    <div class="loginImg">
+                        <img src="img/azoom.png" width="50px">
+                    </div>
+                    
+                    <p id="invalidLogin" style="display:none; color:red;">Invalid username and/or password</p>
+
+                    <input type="text" name="username" id="usernameField" placeholder="Username" required>
+            
+                    <input type="password" name="password" id="passwordField" placeholder="Password" required>
+
+                    <input type="submit" value="Login" id="loginBtn" onclick="rememberMe()">
+                    <label><input type="checkbox" id="rememberMeCB" value="rememberMe"> Remember me</label>
+                    <span class="forgotPwd">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
+    </div><div class="clear"></div>
+
+    <main id="mainContent">
+        <h1>Ways Of Contact</h1>
+        <h2>Our Email</h2>
+        <p>You can email us at azoom@gmail.com for any enquires.</p>
+        <h2>Our Phone Number</h2>
+        <p>You can call us at +65 9123 4567 for any enquires.</p>
+
+        <h1>Where You Can Find Us</h1>
+        <h2>Our Locations</h2>
+        <!-- Embed Google Maps for multiple locations -->
+        <div class="map-wrapper">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.846368363647!2d103.82058551163992!3d1.2647138987179265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1958974bbc2b%3A0xba34578f519df13f!2sVivoCity!5e0!3m2!1sen!2ssg!4v1729187494297!5m2!1sen!2ssg"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7868253767374!2d103.83179151163998!3d1.302878698679271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1991f188a283%3A0x1b3d17f5c2ce6ef5!2sTakashimaya%20Shopping%20Centre!5e0!3m2!1sen!2ssg!4v1729187606448!5m2!1sen!2ssg"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.736341973276!2d103.74020331163986!3d1.334381998647356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da100f542860f3%3A0x1ef4d613d5eb7990!2sWestgate!5e0!3m2!1sen!2ssg!4v1729187654404!5m2!1sen!2ssg"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footerContainer">
+            <span class="footerLeft">
+                <a href="index.html"><img src="img/azoom.png" width="150px"></a>
+            </span>
+
+            <span class="footerMiddle">
+                <span>
+                    <a href="https://www.facebook.com/"><img class="footerIcons" src="img/icons/facebook.png"></a>
+                    <a href="https://www.instagram.com/"><img class="footerIcons" src="img/icons/instagram.png"></a>
+                    <a href="https://www.twitter.com/"><img class="footerIcons" src="img/icons/twitter.png"></a>
+                </span>
+            </span>
+
+            <span class="footerRight">
+                <span>
+                    <p>Contact us:</p>
+                    <p>azoom@gmail.com</p>
+                    <p>+65 9123 4567</p>
+                </span>
+            </span>
+        </div>
+        <div class="footerCredit">
+            Coded and designed by <a href="">Chai Zong Xian</a>.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script src="javascript/rmb.js"></script>
+    <script src="javascript/main.js"></script>
+</body>
+</html>

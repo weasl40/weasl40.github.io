@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Confirmed | AZoom Car Rentals</title>
+    <link rel="icon" type="image/png" href="img/azoom.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2d333d;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        /* Success page styles */
+        #successPage {
+            margin-top: 250px;
+            background-color: #2d333d;
+        }
+
+        .messageContainer {
+            margin: auto auto;
+            width: 800px;
+            text-align: center;
+            color: white;
+        }
+
+        .messageContainer p {
+            margin-top: inherit;
+        }
+
+        .redirectLogo {
+            animation: spin 2s 0.4s ease-in-out backwards infinite;
+        }
+
+        .redirectLink {
+            color: white;
+        }
+
+        @keyframes spin { /* AZoom logo loading animation (currently only for redirecting screen) */
+            0% {
+                transform:rotate(0deg);
+            }
+
+            50% {
+                transform:rotate(180deg);
+            }
+
+            100% {
+                transform:rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body onload="redirectCountDown()">
+    <div id="successPage">
+        <div class="messageContainer animateOnScroll">
+            <h2>Reservation successful!</h2>
+            <h1>Thank you for choosing AZoom!</h1>
+            <p>We have sent you an email confirmation.</p>
+            <br>
+            <p>You will receive an SMS reminder 1 day before your scheduled pick-up time, followed by another 1 hour before.</p>
+            <br><br>
+            <img class="redirectLogo" src="img/azoom.png" width="50px">
+            <br><br>
+            <p>You will be redirected in <strong id="redirectCD">10</strong> seconds.</p>
+            <p>Or click <a class="redirectLink" href="contact.html">here</a> to be redirected immediately</p>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <script>
+        function redirectCountDown() {
+            var timeleft = 10;
+            var downloadTimer = setInterval(function(){
+                if(timeleft < 0){
+                    clearInterval(downloadTimer);
+                    window.location.href = "contact.html";
+                } else {
+                    document.getElementById("redirectCD").innerHTML = timeleft;
+                }
+                timeleft -= 1;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

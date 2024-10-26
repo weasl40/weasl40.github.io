@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation | AZoom Car Rental</title>
+    <link rel="icon" type="image/png" href="img/azoom.png">
+    <style>
+        /* Basic styles for body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Navigation bar styles */
+        nav {
+            margin: 0;
+            padding: 10px;
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            height: 100px; /* Adjust the height as needed */
+            margin-right: 10px; /* Space between logo and navigation links */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        nav ul li {
+            float: left;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #111;
+        }
+
+        nav .login-btn, nav .logout-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        nav .login-btn:hover, nav .logout-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+        }
+
+        /* Media query for responsiveness */
+        @media (max-width: 600px) {
+            nav ul li {
+                float: none;
+            }
+        }
+
+        /* Form styles */
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="time"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 10px 0;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer section */
+        footer {
+            background-color: #333;
+            width: 100%;
+        }
+
+        .footerContainer {
+            padding: 10px 0 100px 0;
+            margin: 0 10%;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Azoom Logo */
+        .footerLeft {
+            width: 33%;
+        }
+
+        /* Social media */
+        .footerMiddle {
+            width: 33%;
+            text-align: center;
+        }
+
+        .footerIcons {
+            margin: 0 10px;
+            width: 35px;
+        }
+
+        /* Contact details */
+        .footerRight {
+            width: 33%;
+            text-align: right;
+            color: white;
+        }
+
+        /* Footer credit */
+        .footerCredit {
+            font-size: 12px;
+            text-align: center;
+            color: gray;
+            padding-bottom: 10px;
+        }
+
+        .footerCredit a {
+            color: darkgray;
+        }
+
+        /* Modal styles */
+        .modalBg {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+
+        .modalContent {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Blur effect for background */
+        .blur {
+            filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="rentProcessPage" onload="checkLogin()">
+    <!-- Header section -->
+    <header>
+        <h1>Reservation | AZoom Car Rental</h1>
+    </header>
+
+    <!-- Navigation bar -->
+    <nav>
+        <img src="img/azoom.png" alt="Logo" class="logo">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="cars.html">Cars</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="login-btn" id="navLoginBtn" >Login</button>
+    </nav>
+
+    <!-- Login Modal -->
+    <div id="loginPopup" class="modalBg">
+        <div class="modalContent">
+            <span class="close" onclick="document.getElementById('loginPopup').style.display='none'">&times;</span>
+            <form id="loginContent">
+                <div class="loginContainer">
+                    <div class="loginImg">
+                        <img src="img/azoom.png" width="50px">
+                    </div>
+                    
+                    <p id="invalidLogin" style="display:none; color:red;">Invalid username and/or password</p>
+
+                    <input type="text" name="username" id="usernameField" placeholder="Username" required>
+            
+                    <input type="password" name="password" id="passwordField" placeholder="Password" required>
+
+                    <input type="submit" value="Login" id="loginBtn" onclick="rememberMe()">
+                    <label><input type="checkbox" id="rememberMeCB" value="rememberMe"> Remember me</label>
+                    <span class="forgotPwd">Forgot <a href="#">password?</a></span>
+                </div>
+            </form>
+        </div>
+    </div><div class="clear"></div>
+      
+    <!-- SECTION BREAK --><!-- SECTION BREAK --><!-- SECTION BREAK --><!-- SECTION BREAK -->
+
+    <div class="contentContainer" id="mainContent">
+        <div class="titleContainer animateOnScroll">
+            <h1>Reservation</h1>
+            <h2>Hyundai Kona 2019</h2>
+        </div>
+        
+        <div class="reservationContainer">
+            <div class="xrayContainer animateOnScroll">
+                <div class="xrayCar">
+                    <div class="engineSpot"><span></span>
+                        <div class="engineBox">
+                            <p><strong>Engine Capacity:</strong> 64.0kWh Electric Engine</p>
+                            <p><strong>Driving Range:</strong> 484km</p>
+                            <p><strong>Efficiency:</strong> 15.4kWh/100km</p>
+                            <p><strong>Torque:</strong> 395Nm</p>
+                            <p><strong>Top Speed:</strong> 167km/h</p>
+                        </div>
+                    </div>
+    
+                    <div class="infotainmentSpot">
+                        <span></span>
+                        <div class="infotainmentBox">
+                            <p><strong>Bluetooth:</strong> Yes</p>
+                            <p><strong>GPS Navigation:</strong> Yes</p>
+                            <p><strong>Android Auto:</strong> Yes</p>
+                            <p><strong>Apple CarPlay:</strong> Yes</p>
+                        </div>
+                    </div>
+                  
+                    <div class="seatsSpot"><span></span>
+                        <div class="seatsBox">
+                            <p><strong>Seating Capacity:</strong> 5 people</p>
+                        </div>
+                    </div>
+    
+                    <div class="bootSpot"><span></span>
+                        <div class="bootBox">
+                            <p><strong>Boot Capacity:</strong> 332 litres</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    
+            <div class="bookingFormContainer animateOnScroll">
+                <form id="bookingForm">
+                    <h1>Personal Particulars</h1>
+
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" placeholder="John Doe" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="john.doe@email.com" required>
+
+                    <label for="phone">Contact No.:</label>
+                    <input type="tel" id="phone" placeholder="98765432" pattern="(6|8|9)\d{7}" required>
+                    
+                    <hr style="margin-top: 40px;">
+
+                    <h1>Rental Details</h1>
+                    <div class="rentalDetails">
+                        <div class="rentalDetailsLeft">
+                            <label for="pickUpDate">Pick-up Date:</label>
+                            <input type="date" id="pickUpDate" name="pickUpDate" required>
+                            
+                            <label for="pickUpTime">Pick-up Time:</label>
+                            <input type="time" id="pickUpTime" name="pickUpTime" min="08:00" max="22:00" required>
+                            
+                            <label for="pickUpLocation">Pick-up Location:</label>
+                            <select id="pickUpLocation" name="pickUpLocation" required>
+                                <option value="">Select Office</option>
+                                <option value="branchWest">WestGate</option>
+                                <option value="branchSouth">VivoCity</option>
+                                <option value="branchCentral">Takashimaya Shopping Centre</option>
+                            </select>
+                        </div>
+                        <div class="rentalDetailsRight">
+                            <label for="returnDate">Return Date:</label>
+                            <input type="date" id="returnDate" name="returnDate" required>
+                            
+                            <label for="returnTime">Return Time:</label>
+                            <input type="time" id="returnTime" name="returnTime" required>
+                            
+                            <label for="returnLocation">Return Location:</label>
+                            <select id="returnLocation" name="returnLocation" required>
+                                <option value="">Select Carpark</option>
+                                <option value="carparkWG">WestGate</option>
+                                <option value="carparkTSC">Takashimaya Shopping Centre</option>
+                                <option value="carparkVC">VivoCity</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="proceedResBtn">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div><div class="clear"></div>
+    
+    <!-- SECTION BREAK --><!-- SECTION BREAK --><!-- SECTION BREAK --><!-- SECTION BREAK -->
+
+    <div id="creditCardPopup" class="modalBg">
+        <div class="modalContent">
+            <span class="close" onclick="document.getElementById('creditCardPopup').style.display='none'">&times;</span>
+            <form id="creditCardContent">
+                <h1>Confirm Reservation</h1>
+                <div style="display: flex">
+                    <div class="creditCardOwner">
+                        <label for="owner">Cardholder</label>
+                        <input type="text" id="cardholder" placeholder="Full Name" required>
+                    </div>
+                    <div class="creditCardCVV">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="***" pattern="[0-9]{3,4}" required>
+                    </div>
+                </div>
+                <div id="creditCardNumber">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" required>
+                </div>
+                
+                <label>Expiration Date</label>
+                <div class="creditCardExpiration" id="expiration-date">
+                    <select required>
+                        <option value="01">January</option>
+                        <option value="02">February </option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                    <select>
+                        <option value="24"> 2024</option>
+                        <option value="25"> 2025</option>
+                        <option value="26"> 2026</option>
+                        <option value="27"> 2027</option>
+                        <option value="28"> 2028</option>
+                        <option value="29"> 2029</option>
+                    </select>
+
+                    <div class="creditCardImg">
+                        <img src="img/icons/visa.png" id="visa">
+                        <img src="img/icons/mastercard.png" id="mastercard">
+                        <img src="img/icons/amex.png" id="amex">
+                    </div>
+                </div>
+                
+                <button class="confirmResBtn">Confirm</button>
+                <p style="font-size: 10px;">(Visa: 4716108999716531 | Master: 5281037048916168 | Amex: 371449635398431)</p>
+            </form>
+        </div>
+    </div><div class="clear"></div>
+
+    <!-- SECTION BREAK --><!-- SECTION BREAK --><!-- SECTION BREAK --><!-- SECTION BREAK -->
+
+    <footer>
+        <div class="footerContainer">
+            <span class="footerLeft">
+                <a href="home.html"><img src="img/azoom.png" width="150px"></a>
+            </span>
+
+            <span class="footerMiddle">
+                <span>
+                    <a href="https://www.facebook.com/"><img class="footerIcons" src="img/icons/facebook.png"></a>
+                    <a href="https://www.instagram.com/"><img class="footerIcons" src="img/icons/instagram.png"></a>
+                    <a href="https://www.twitter.com/"><img class="footerIcons" src="img/icons/twitter.png"></a>
+                </span>
+            </span>
+
+            <span class="footerRight">
+                <span>
+                    <p>Contact us:</p>
+                    <p>azoom@gmail.com</p>
+                    <p>+65 9123 4567</p>
+                </span>
+            </span>
+        </div>
+        <div class="footerCredit">
+            Coded and designed by <a href="">Chai Zong Xian</a>.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+    <script src="javascript/rmb.js"></script>
+    <script src="javascript/main.js"></script>
+</body>
+</html>
